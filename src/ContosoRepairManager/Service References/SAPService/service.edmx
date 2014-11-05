@@ -1,0 +1,210 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="2.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="ZGWSAMPLE_SRV" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="SalesOrderLineItem" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <Key>
+          <PropertyRef Name="SoId" />
+          <PropertyRef Name="SoItemPos" />
+        </Key>
+        <Property Name="SoId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sa. Ord. ID" />
+        <Property Name="SoItemPos" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="PO Item Pos" />
+        <Property Name="ProductId" Type="Edm.String" MaxLength="10" sap:label="Product ID" />
+        <Property Name="Note" Type="Edm.String" MaxLength="255" sap:label="Description" />
+        <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="GrossAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Gross Amt." />
+        <Property Name="GrossAmountExt" Type="Edm.Decimal" Precision="12" Scale="4" sap:label="Amount" />
+        <Property Name="NetAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Net Amt." />
+        <Property Name="NetAmountExt" Type="Edm.Decimal" Precision="12" Scale="4" sap:label="Amount" />
+        <Property Name="TaxAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Tax Amt." />
+        <Property Name="TaxAmountExt" Type="Edm.Decimal" Precision="12" Scale="4" sap:label="Amount" />
+        <Property Name="DeliveryDate" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="Quantity" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Quantity" />
+        <Property Name="QuantityUnit" Type="Edm.String" MaxLength="3" sap:label="Qty. Unit" sap:semantics="unit-of-measure" />
+        <NavigationProperty Name="Product" Relationship="ZGWSAMPLE_SRV.Assoc_SalesOrderLineItem_Product" FromRole="FromRole_Assoc_SalesOrderLineItem_Product" ToRole="ToRole_Assoc_SalesOrderLineItem_Product" />
+      </EntityType>
+      <EntityType Name="BusinessPartner" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <Key>
+          <PropertyRef Name="BusinessPartnerID" />
+        </Key>
+        <Property Name="ChangedAt" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="ChangedBy" Type="Edm.String" MaxLength="10" sap:label="Employee ID" />
+        <Property Name="CreatedAt" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="CreatedBy" Type="Edm.String" MaxLength="10" sap:label="Employee ID" />
+        <Property Name="AddressValEndDate" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="AddressValStartDate" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="AddressType" Type="Edm.String" MaxLength="2" sap:label="Address Type" />
+        <Property Name="Country" Type="Edm.String" MaxLength="3" sap:label="Country" sap:semantics="country" />
+        <Property Name="BusinessPartnerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Bus. Part. ID" />
+        <Property Name="BpRole" Type="Edm.String" MaxLength="3" sap:label="Bus. Part. Role" />
+        <Property Name="Building" Type="Edm.String" MaxLength="10" sap:label="Building" />
+        <Property Name="EmailAddress" Type="Edm.String" MaxLength="255" sap:label="E-Mail Address" sap:semantics="email" />
+        <Property Name="PhoneNumber" Type="Edm.String" MaxLength="30" sap:label="Phone No." sap:semantics="tel" />
+        <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:label="Phone No." sap:semantics="tel" />
+        <Property Name="Street" Type="Edm.String" MaxLength="60" sap:label="Street" sap:semantics="street" />
+        <Property Name="WebAddress" Type="Edm.String" MaxLength="255" sap:label="Description" sap:semantics="url" />
+        <Property Name="CompanyName" Type="Edm.String" MaxLength="80" sap:label="Company Name" sap:semantics="org" />
+        <Property Name="LegalForm" Type="Edm.String" MaxLength="10" sap:label="Legal Form" />
+        <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Postal Code" sap:semantics="zip" />
+        <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="City" Type="Edm.String" MaxLength="40" sap:label="City" sap:semantics="city" />
+        <NavigationProperty Name="Contacts" Relationship="ZGWSAMPLE_SRV.Assoc_BusinessPartner_Contacts" FromRole="FromRole_Assoc_BusinessPartner_Contacts" ToRole="ToRole_Assoc_BusinessPartner_Contacts" />
+        <NavigationProperty Name="SalesOrders" Relationship="ZGWSAMPLE_SRV.Assoc_SalesOrder_BusinessPartner" FromRole="ToRole_Assoc_SalesOrder_BusinessPartner" ToRole="FromRole_Assoc_SalesOrder_BusinessPartner" />
+      </EntityType>
+      <EntityType Name="Contact" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <Key>
+          <PropertyRef Name="LastName" />
+          <PropertyRef Name="MiddleName" />
+          <PropertyRef Name="FirstName" />
+          <PropertyRef Name="Title" />
+          <PropertyRef Name="BusinessPartnerID" />
+          <PropertyRef Name="PostalCode" />
+          <PropertyRef Name="City" />
+          <PropertyRef Name="Street" />
+          <PropertyRef Name="Building" />
+          <PropertyRef Name="Country" />
+          <PropertyRef Name="AddressType" />
+        </Key>
+        <Property Name="EmailAddress" Type="Edm.String" MaxLength="255" sap:label="E-Mail Address" sap:semantics="email" />
+        <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:label="Phone No." />
+        <Property Name="PhoneNumber" Type="Edm.String" MaxLength="30" sap:label="Phone No." sap:semantics="tel" />
+        <Property Name="Sex" Type="Edm.String" MaxLength="1" sap:label="Sex" />
+        <Property Name="Initials" Type="Edm.String" MaxLength="10" sap:label="Initials" />
+        <Property Name="Nickname" Type="Edm.String" MaxLength="40" sap:label="Nickname" sap:semantics="nickname" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Last Name" sap:semantics="familyname" />
+        <Property Name="MiddleName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Middle Name" sap:semantics="middlename" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="First Name" sap:semantics="name" />
+        <Property Name="Title" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Title" sap:semantics="honorific" />
+        <Property Name="BusinessPartnerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Bus. Part. ID" />
+        <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Language" />
+        <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Postal Code" sap:semantics="zip" />
+        <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="City" sap:semantics="city" />
+        <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="Street" sap:semantics="street" />
+        <Property Name="Building" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Building" />
+        <Property Name="Country" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Country" />
+        <Property Name="AddressType" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Address Type" />
+        <Property Name="AddressValStartDate" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="AddressValEndDate" Type="Edm.DateTime" sap:label="Time Stamp" />
+      </EntityType>
+      <EntityType Name="SalesOrder" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <Key>
+          <PropertyRef Name="SoId" />
+        </Key>
+        <Property Name="SoId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sa. Ord. ID" />
+        <Property Name="CreatedBy" Type="Edm.String" MaxLength="10" sap:label="Employee ID" />
+        <Property Name="CreatedAt" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="ChangedBy" Type="Edm.String" MaxLength="10" sap:label="Employee ID" />
+        <Property Name="ChangedAt" Type="Edm.DateTime" sap:label="Time Stamp" />
+        <Property Name="CreatedByBp" Type="Edm.String" MaxLength="1" sap:label="Value" />
+        <Property Name="ChangedByBp" Type="Edm.String" MaxLength="1" sap:label="Value" />
+        <Property Name="Note" Type="Edm.String" MaxLength="255" sap:label="Description" />
+        <Property Name="BuyerId" Type="Edm.String" MaxLength="10" sap:label="Bus. Part. ID" />
+        <Property Name="BuyerName" Type="Edm.String" MaxLength="80" sap:label="Company Name" />
+        <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="GrossAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Gross Amt." />
+        <Property Name="GrossAmountExt" Type="Edm.Decimal" Precision="23" Scale="4" sap:label="Amount" />
+        <Property Name="NetAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Net Amt." />
+        <Property Name="NetAmountExt" Type="Edm.Decimal" Precision="23" Scale="4" sap:label="Amount" />
+        <Property Name="TaxAmount" Type="Edm.Decimal" Precision="15" Scale="14" sap:label="Tax Amt." />
+        <Property Name="TaxAmountExt" Type="Edm.Decimal" Precision="23" Scale="4" sap:label="Amount" />
+        <Property Name="LifecycleStatus" Type="Edm.String" MaxLength="1" sap:label="PO Lifecycle" />
+        <Property Name="BillingStatus" Type="Edm.String" MaxLength="1" sap:label="PO Confirmation" />
+        <Property Name="DeliveryStatus" Type="Edm.String" MaxLength="1" sap:label="PO Ordering" />
+        <NavigationProperty Name="LineItems" Relationship="ZGWSAMPLE_SRV.Assoc_SalesOrder_SalesOrderLineItem" FromRole="FromRole_Assoc_SalesOrder_SalesOrderLineItem" ToRole="ToRole_Assoc_SalesOrder_SalesOrderLineItem" />
+        <NavigationProperty Name="BusinessPartner" Relationship="ZGWSAMPLE_SRV.Assoc_SalesOrder_BusinessPartner" FromRole="FromRole_Assoc_SalesOrder_BusinessPartner" ToRole="ToRole_Assoc_SalesOrder_BusinessPartner" />
+      </EntityType>
+      <EntityType Name="Product" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <Key>
+          <PropertyRef Name="ProductId" />
+        </Key>
+        <Property Name="ProductId" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Product ID" />
+        <Property Name="TypeCode" Type="Edm.String" MaxLength="2" sap:label="Prod. Type Code" />
+        <Property Name="Category" Type="Edm.String" MaxLength="40" sap:label="The Display Name for Product Category" />
+        <Property Name="Name" Type="Edm.String" MaxLength="255" sap:label="Description" />
+        <Property Name="Description" Type="Edm.String" MaxLength="255" sap:label="Description" />
+        <Property Name="SupplierId" Type="Edm.String" MaxLength="10" sap:label="Bus. Part. ID" />
+        <Property Name="SupplierName" Type="Edm.String" MaxLength="80" sap:label="Company Name" />
+        <Property Name="TaxTarifCode" Type="Edm.Byte" sap:label="Prod. Tax Code" />
+        <Property Name="MeasureUnit" Type="Edm.String" MaxLength="3" sap:label="Qty. Unit" sap:semantics="unit-of-measure" />
+        <Property Name="WeightMeasure" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Wt. Measure" />
+        <Property Name="WeightUnit" Type="Edm.String" MaxLength="3" sap:label="Qty. Unit" sap:semantics="unit-of-measure" />
+        <Property Name="Price" Type="Edm.Decimal" Precision="12" Scale="4" sap:label="Price" />
+        <Property Name="CurrencyCode" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code" />
+        <Property Name="Width" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Dimensions" />
+        <Property Name="Depth" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Dimensions" />
+        <Property Name="Height" Type="Edm.Decimal" Precision="7" Scale="3" sap:label="Dimensions" />
+        <Property Name="DimUnit" Type="Edm.String" MaxLength="3" sap:label="Dim. Unit" sap:semantics="unit-of-measure" />
+        <Property Name="ProductPicUrl" Type="Edm.String" MaxLength="255" sap:label="Pic URL" />
+        <NavigationProperty Name="Supplier" Relationship="ZGWSAMPLE_SRV.Assoc_Product_BusinessPartner" FromRole="FromRole_Assoc_Product_BusinessPartner" ToRole="ToRole_Assoc_Product_BusinessPartner" />
+      </EntityType>
+      <ComplexType Name="LatLong">
+        <Property Name="Latitude" Type="Edm.Decimal" Nullable="false" Precision="46" Scale="0" sap:semantics="geo-lat" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <Property Name="Longitude" Type="Edm.Decimal" Nullable="false" Precision="46" Scale="0" sap:semantics="geo-lon" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+      </ComplexType>
+      <Association Name="Assoc_BusinessPartner_Contacts" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <End Type="ZGWSAMPLE_SRV.BusinessPartner" Multiplicity="1" Role="FromRole_Assoc_BusinessPartner_Contacts" />
+        <End Type="ZGWSAMPLE_SRV.Contact" Multiplicity="*" Role="ToRole_Assoc_BusinessPartner_Contacts" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Assoc_BusinessPartner_Contacts">
+            <PropertyRef Name="BusinessPartnerID" />
+          </Principal>
+          <Dependent Role="ToRole_Assoc_BusinessPartner_Contacts">
+            <PropertyRef Name="BusinessPartnerID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Assoc_SalesOrder_SalesOrderLineItem" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <End Type="ZGWSAMPLE_SRV.SalesOrder" Multiplicity="1" Role="FromRole_Assoc_SalesOrder_SalesOrderLineItem" />
+        <End Type="ZGWSAMPLE_SRV.SalesOrderLineItem" Multiplicity="*" Role="ToRole_Assoc_SalesOrder_SalesOrderLineItem" />
+        <ReferentialConstraint>
+          <Principal Role="FromRole_Assoc_SalesOrder_SalesOrderLineItem">
+            <PropertyRef Name="SoId" />
+          </Principal>
+          <Dependent Role="ToRole_Assoc_SalesOrder_SalesOrderLineItem">
+            <PropertyRef Name="SoId" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="Assoc_SalesOrder_BusinessPartner" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <End Type="ZGWSAMPLE_SRV.SalesOrder" Multiplicity="*" Role="FromRole_Assoc_SalesOrder_BusinessPartner" />
+        <End Type="ZGWSAMPLE_SRV.BusinessPartner" Multiplicity="1" Role="ToRole_Assoc_SalesOrder_BusinessPartner" />
+      </Association>
+      <Association Name="Assoc_Product_BusinessPartner" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <End Type="ZGWSAMPLE_SRV.Product" Multiplicity="1" Role="FromRole_Assoc_Product_BusinessPartner" />
+        <End Type="ZGWSAMPLE_SRV.BusinessPartner" Multiplicity="0..1" Role="ToRole_Assoc_Product_BusinessPartner" />
+      </Association>
+      <Association Name="Assoc_SalesOrderLineItem_Product" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+        <End Type="ZGWSAMPLE_SRV.SalesOrderLineItem" Multiplicity="1" Role="FromRole_Assoc_SalesOrderLineItem_Product" />
+        <End Type="ZGWSAMPLE_SRV.Product" Multiplicity="0..1" Role="ToRole_Assoc_SalesOrderLineItem_Product" />
+      </Association>
+      <EntityContainer Name="ZGWSAMPLE_SRV" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="BusinessPartnerCollection" EntityType="ZGWSAMPLE_SRV.BusinessPartner" sap:searchable="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <EntitySet Name="ContactCollection" EntityType="ZGWSAMPLE_SRV.Contact" sap:searchable="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <EntitySet Name="SalesOrderCollection" EntityType="ZGWSAMPLE_SRV.SalesOrder" sap:searchable="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <EntitySet Name="ProductCollection" EntityType="ZGWSAMPLE_SRV.Product" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <EntitySet Name="SalesOrderLineItemCollection" EntityType="ZGWSAMPLE_SRV.SalesOrderLineItem" sap:searchable="true" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <AssociationSet Name="Assoc_SalesOrder_SalesOrderLineItem_Asso" Association="ZGWSAMPLE_SRV.Assoc_SalesOrder_SalesOrderLineItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+          <End EntitySet="SalesOrderCollection" Role="FromRole_Assoc_SalesOrder_SalesOrderLineItem" />
+          <End EntitySet="SalesOrderLineItemCollection" Role="ToRole_Assoc_SalesOrder_SalesOrderLineItem" />
+        </AssociationSet>
+        <AssociationSet Name="Assoc_SalesOrderLineItem_Product_AssocSe" Association="ZGWSAMPLE_SRV.Assoc_SalesOrderLineItem_Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+          <End EntitySet="SalesOrderLineItemCollection" Role="FromRole_Assoc_SalesOrderLineItem_Product" />
+          <End EntitySet="ProductCollection" Role="ToRole_Assoc_SalesOrderLineItem_Product" />
+        </AssociationSet>
+        <AssociationSet Name="Assoc_Product_BusinessPartner_AssocSet" Association="ZGWSAMPLE_SRV.Assoc_Product_BusinessPartner" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+          <End EntitySet="ProductCollection" Role="FromRole_Assoc_Product_BusinessPartner" />
+          <End EntitySet="BusinessPartnerCollection" Role="ToRole_Assoc_Product_BusinessPartner" />
+        </AssociationSet>
+        <AssociationSet Name="AssocSet_BusinessPartnerSet" Association="ZGWSAMPLE_SRV.Assoc_BusinessPartner_Contacts" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+          <End EntitySet="BusinessPartnerCollection" Role="FromRole_Assoc_BusinessPartner_Contacts" />
+          <End EntitySet="ContactCollection" Role="ToRole_Assoc_BusinessPartner_Contacts" />
+        </AssociationSet>
+        <AssociationSet Name="Assoc_SalesOrder_BusinessPartner_AssocSe" Association="ZGWSAMPLE_SRV.Assoc_SalesOrder_BusinessPartner" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+          <End EntitySet="SalesOrderCollection" Role="FromRole_Assoc_SalesOrder_BusinessPartner" />
+          <End EntitySet="BusinessPartnerCollection" Role="ToRole_Assoc_SalesOrder_BusinessPartner" />
+        </AssociationSet>
+      </EntityContainer>
+      <atom:link rel="self" href="http://cbasapsql.cloudapp.net/sap/opu/odata/sap/ZGWSAMPLE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+      <atom:link rel="latest-version" href="http://cbasapsql.cloudapp.net/sap/opu/odata/sap/ZGWSAMPLE_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom" />
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
